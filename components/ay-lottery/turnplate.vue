@@ -47,6 +47,11 @@
 				type: Number,
 				default: 5
 			},
+			//停留位置
+			stay_index :{
+				type: Number,
+				default: 1
+			},
 		},
 		data() {
 			return {
@@ -146,7 +151,8 @@
 				}
 				//中奖index  
 				var awardsNum = that.list;
-				var awardIndex = Math.round(Math.random() * (awardsNum.length - 1)); //随机数  
+				//var awardIndex = Math.round(Math.random() * (awardsNum.length - 1)); //随机数  
+				var awardIndex = that.stay_index ;
 				var runNum = 8; //旋转8周  
 				var duration = 4000; //时长  
 
@@ -169,12 +175,7 @@
 					setTimeout(function() {
 						
 						that.btnDisabled = '';
-						let data = {
-							curIndex: awardIndex,
-							item: that.list[awardIndex],
-							list: that.list
-						};
-						this.$emit('result', data);
+						
 					}.bind(that), duration);
 				} else {
 					setTimeout(function() {
@@ -186,7 +187,19 @@
 						that.btnDisabled = '';
 					}.bind(that), duration);
 				}
-
+				
+				setTimeout(function() {
+					
+					let data = {
+						curIndex: awardIndex,
+						item: that.list[awardIndex],
+						list: that.list,
+						isAward : isAward ,
+					};
+					this.$emit('result', data);
+					
+				}.bind(that), duration);
+				
 			}
 		}
 

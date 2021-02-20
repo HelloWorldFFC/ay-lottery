@@ -7,7 +7,7 @@
 		
 		<aylottery :type="2" :list="list" themeColor="#33CCCC" bgColor="#1E90FF" bg_sd_Color="#4169E1" @result="resultFun" @toDetailPage="toDetailPage"></aylottery>
 		
-		<aylottery :type="3" :list="list_r" :height="600" :width="600" :chance_num_init="chance_num_init" @result="resultFun_chance" @toDetailPage="toDetailPage"></aylottery>
+		<aylottery :type="3" :list="list_r" :height="600" :width="600" :chance_num_init="chance_num_init" @result="resultFun_chance" @toDetailPage="toDetailPage" :stay_index="stay_index_r"></aylottery>
 		
 		<!-- #ifndef MP-WEIXIN -->
 		<aylottery :type="4" style="margin-top: 40upx;" ref="blowRef" :result_txt="result_blow" :height="150" :width="350" themeColor="#33CCCC" txtColor="#ffffff"
@@ -25,6 +25,8 @@
 
 		data() {
 			return {
+				stay_index_r_init : 4 ,
+				stay_index_r : 1,
 				tips_init_turn:'点击',
 				no_z_init_turn:'点击',
 				result_turn:'',
@@ -208,17 +210,20 @@
 			},
 			resultFun_chance(e){
 				let that = this;
+				
 				let item = e.item;
 				let index = e.curIndex ;
-				this.msg_modal('获得' + (item.name),'恭喜')
-				uni.showModal({
-					title: '恭喜',
-					content: '获得' + (item.name),
-					showCancel: false
-				});
-				let type = item.type ;
-				if(type==1){
-					that.chance_num_init += item.val ;
+				let list = e.list;
+				
+				//定义下一次转的位置
+				that.stay_index_r = Math.round(Math.random() * (list.length - 1)); //随机数
+				
+				if(e.isAward){
+					this.msg_modal('获得' + (item.name),'恭喜')
+					let type = item.type ;
+					if(type==1){
+						that.chance_num_init += item.val ;
+					}
 				}
 			},
 			async loadData() {
@@ -231,7 +236,10 @@
 
 				that.result_blow = that.getShowTxt();
 				uni.hideLoading();
-
+				
+				//第一次转盘停的位置
+				that.stay_index_r = that.stay_index_r_init ;
+				
 				that.isLoaded = true;
 
 			},

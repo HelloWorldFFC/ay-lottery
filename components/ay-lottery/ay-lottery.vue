@@ -18,7 +18,7 @@
 		
 		<marquee v-if="type==2" :list="list" :themeColor="themeColor" :bgColor="bgColor" :bg_sd_Color="bg_sd_Color" @result="result" @toDetailPage="toDetailPage"></marquee>
 		
-		<turnplate v-if="type==3" :list="list" :chance_num_init="chance_num_init" :height="height" :width="width" @result="result" @toDetailPage="toDetailPage"></turnplate>
+		<turnplate v-if="type==3" :list="list" :chance_num_init="chance_num_init" :height="height" :width="width" @result="result" @toDetailPage="toDetailPage" :stay_index="stay_index"></turnplate>
 		
 		<blow v-if="type==4" ref="blowRef" :result_txt="result_txt"  :height="height" :width="width" :themeColor="themeColor" :txtColor="txtColor"
 		 :txtFontSize="txtFontSize" :canvasId="canvasId"></blow>
@@ -135,6 +135,11 @@
 			canvasId: {
 				type: String,
 				default: 'blow',
+			},
+			//停留位置
+			stay_index :{
+				type: Number,
+				default: 1
 			},
 		},
 		computed: {

@@ -77,6 +77,9 @@
 		},
 		
 		methods: {
+			touchStart(){},
+			touchMove(){},
+			touchEnd(){},
 			initBlow() {
 				// 刮初始化信息必须在onReady后，不然h5不支持（小程序可在onLoad执行）
 				new scratch(this, {
