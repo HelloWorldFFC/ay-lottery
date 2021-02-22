@@ -20,9 +20,53 @@
 		
 		<turnplate v-if="type==3" :list="list" :chance_num_init="chance_num_init" :height="height" :width="width" @result="result" @toDetailPage="toDetailPage" :stay_index="stay_index"></turnplate>
 		
-		<blow v-if="type==4" ref="blowRef" :result_txt="result_txt"  :height="height" :width="width" :themeColor="themeColor" :txtColor="txtColor"
-		 :txtFontSize="txtFontSize" :canvasId="canvasId"></blow>
-		 
+		<blow v-if="type==4"  
+		ref="blowRef"
+		:canvasId="canvasId" 
+		:height="height" 
+		:width="width" 
+		:percentage="percentage" 
+		:touchSize="touchSize"
+		:fillColor="fillColor"
+		:watermark="watermark"
+		:watermarkColor="watermarkColor"
+		:watermarkSize="watermarkSize"
+		:title="title"
+		:titleColor="titleColor"
+		:titleSize="titleSize"
+		:disabled="disabled"
+		
+		:is_show="is_show"
+		:result_img="result_img"
+		:result_txt="result_txt"
+		:txtFontSize="txtFontSize" 
+		:txtColor="txtColor"
+		@complete="complete"
+		@init="init"></blow>
+		
+		<blowImg v-if="type==5"
+		ref="blowRef"
+		:canvasId="canvasId" 
+		:height="height" 
+		:width="width" 
+		:percentage="percentage" 
+		:touchSize="touchSize"
+		:fillColor="fillColor"
+		:watermark="watermark"
+		:watermarkColor="watermarkColor"
+		:watermarkSize="watermarkSize"
+		:title="title"
+		:titleColor="titleColor"
+		:titleSize="titleSize"
+		:disabled="disabled"
+		
+		:is_show="is_show"
+		:result_img="result_img"
+		:result_txt="result_txt"
+		:txtFontSize="txtFontSize" 
+		:txtColor="txtColor"
+		@complete="complete"
+		@init="init"></blowImg>
 	</view>
 </template>
 
@@ -31,18 +75,19 @@
 	import turnplate from './turnplate.vue';
 	import turnLottery from './turnLottery.vue';
 	import blow from './blow.vue';
-	
+	import blowImg from './blow_img.vue';
 	export default {
 		components: {
 			marquee,
 			turnplate,
 			turnLottery,
 			blow,
+			blowImg,
 		},
 		props: {
 			type: {
 				type: Number,
-				default: 1, //1:翻牌  2:跑马灯 3：转盘 4： 刮一刮（小程序组件不显示刮层）
+				default: 1, //1:翻牌  2:跑马灯 3：转盘 4： 刮一刮（文本） 5： 刮一刮（图片）
 			},
 			list: {
 				type: Array,
@@ -141,6 +186,55 @@
 				type: Number,
 				default: 1
 			},
+			percentage : { //刮开百分之多少的时候开奖
+				type : Number ,
+				default : 45 
+			},
+			touchSize : { //触摸画笔大小
+				type : Number ,
+				default : 20 
+			},
+			fillColor : { //未刮开图层时的填充色
+				type : String ,
+				default : '#ddd' 
+			},
+			watermark : { //水印文字
+				type : String ,
+				default : '刮一刮' 
+			},
+			watermarkColor : { //水印文字颜色
+				type : String ,
+				default : '#c5c5c5' 
+			},
+			watermarkSize : { //水印文字大小
+				type : Number ,
+				default : 14 
+			},
+			title : { //提示文字
+				type : String ,
+				default : '刮一刮开奖' 
+			},
+			titleColor : { //提示文字颜色
+				type : String ,
+				default : '#888' 
+			},
+			titleSize : { //提示文字大小
+				type : Number ,
+				default : 24 
+			},
+			disabled : { //是否禁止刮卡
+				type : Boolean ,
+				default : false 
+			},
+			
+			is_show : { //防止画布画好前闪烁
+				type : Boolean ,
+				default : false 
+			},
+			result_img: {
+				type: String,
+				default: 'https://cdn.pixabay.com/photo/2021/01/04/07/38/lily-5886728__340.jpg',
+			},
 		},
 		computed: {
 
@@ -171,6 +265,12 @@
 			},
 			toDetailPage(e){
 				this.$emit('toDetailPage', e);
+			},
+			complete(e){
+				this.$emit('complete', e);
+			},
+			init(e){
+				this.$emit('init', e);
 			},
 		},
 	}

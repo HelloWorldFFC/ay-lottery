@@ -9,22 +9,76 @@
 		
 		<aylottery :type="3" :list="list_r" :height="600" :width="600" :chance_num_init="chance_num_init" @result="resultFun_chance" @toDetailPage="toDetailPage" :stay_index="stay_index_r"></aylottery>
 		
-		<!-- #ifndef MP-WEIXIN -->
-		<aylottery :type="4" style="margin-top: 40upx;" ref="blowRef" :result_txt="result_blow" :height="150" :width="350" themeColor="#33CCCC" txtColor="#ffffff"
-		 :txtFontSize="50" canvasId="canvasId2"></aylottery>
-		<!-- #endif -->
+		
+		<!-- <aylottery :type="4" canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 20upx 40upx;"
+		 @complete="seatShow" :disabled="false" title="刮文本" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow" :result_txt="result_blow" themeColor="#33CCCC" :txtFontSize="txtFontSize_blow" :txtColor="txtColor_blow">
+		</aylottery> -->
+		
+		<!-- <aylottery :type="5" canvasId="canvasId2" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;" @complete="seatShow"
+		 :disabled="false" title="刮图片" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow" :result_img="result_img_blow"></aylottery> -->
+		
+		
+		 <!-- <blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;"
+		  @complete="seatShow" :disabled="false" title="刮文本" watermark="刮一刮" @init="init_blow">
+		 	<view class="blow" v-if="is_show_blow" style="height:200rpx;width:600rpx;position: absolute;">
+		 		<view class="box" :style="{background: themeColor }">
+		 			<view class="result" :style="[{'font-size':txtFontSize_blow+'rpx'},{color: txtColor_blow }]">
+		 				<text>{{result_blow}}</text>
+		 			</view>
+		 
+		 		</view>
+		 
+		 	</view>
+		 </blowAny> -->
+		 
+		 <!-- <blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;" @complete="seatShow"
+		  :disabled="false" title="刮图片" watermark="刮一刮" @init="init_blow">
+		 	<view style="position: absolute;" v-if="is_show_blow" >
+		 	
+		 		<view>
+		 			<image style="height:200rpx;width:600rpx;"  :src="result_img_blow"></image>
+		 		</view>
+		 	
+		 	</view>
+		 	
+		 
+		 </blowAny> -->
+		 
+		
+		<blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;" @complete="seatShow"
+		 :disabled="false" title="刮自定义" watermark="刮一刮" @init="init_blow">
+			<view style="position: absolute;" v-if="is_show_blow" >
+				
+				<view>
+					自定义内容需自己编写
+				</view>
+			
+			</view>
+			
+		
+		</blowAny>
+		
 	</view>
 </template>
 
 <script>
 	import aylottery from '@/components/ay-lottery/ay-lottery.vue';
+	import blowAny from '@/components/ay-lottery/blow_any.vue';
 	export default {
 		components: {
 			aylottery,
+			blowAny,
 		},
 
 		data() {
 			return {
+				result_img_blow: 'https://cdn.pixabay.com/photo/2021/01/04/07/38/lily-5886728__340.jpg',
+				is_show_blow: false, //防止画布画好前闪烁
+				themeColor: '#33CCCC',
+				txtFontSize_blow: 50,
+				txtColor_blow: '#FFFFFF',
+				
+				
 				stay_index_r_init : 4 ,
 				stay_index_r : 1,
 				tips_init_turn:'点击',
@@ -154,12 +208,23 @@
 
 			//#ifndef MP-WEIXIN
 			setTimeout(function() {
-				that.$refs.blowRef.initBlow()
+				//that.$refs.blowRef.initBlow()
 			}, 50)
 			// #endif
 
 		},
 		methods: {
+			//刮一刮
+			init_blow() {
+				this.is_show_blow = true;
+			},
+			reset: function() {
+				this.$refs.card.init();
+			},
+			
+			seatShow: function() {
+				
+			},
 			toDetailPage(e) {
 				let list = e.list;
 				let idx = e.curIndex;
@@ -235,6 +300,8 @@
 				})
 
 				that.result_blow = that.getShowTxt();
+				that.result_blow = that.getShowTxt();
+				
 				uni.hideLoading();
 				
 				//第一次转盘停的位置
@@ -267,5 +334,43 @@
 </script>
 
 <style lang="scss">
-
+	// 刮自定义
+	.blow {
+	
+		background-size: contain;
+		margin: 0rpx auto;
+		box-sizing: border-box;
+		position: relative;
+		overflow: hidden;
+	
+		.box {
+			width: 100%;
+			height: 100%;
+			// background: #aaaa7f;
+			border-radius: 10rpx;
+			position: relative;
+			overflow: hidden;
+	
+			.result {
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				// font-size: 50rpx;
+				// color: #FFFFFF;
+			}
+	
+	
+		}
+	
+	
+	}
+	
+	.box {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
 </style>
