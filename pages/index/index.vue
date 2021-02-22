@@ -45,7 +45,7 @@
 		 </blowAny> -->
 		 
 		
-		<blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;" @complete="seatShow"
+		<!-- <blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;" @complete="seatShow"
 		 :disabled="false" title="刮自定义" watermark="刮一刮" @init="init_blow">
 			<view style="position: absolute;" v-if="is_show_blow" >
 				
@@ -56,7 +56,7 @@
 			</view>
 			
 		
-		</blowAny>
+		</blowAny> -->
 		
 	</view>
 </template>
