@@ -12,8 +12,8 @@
 					</view>
 
 				</view>
-				
-				
+
+
 				<canvas style="position: absolute;" :style="{width: width+'rpx', height : height+'rpx'}" :disable-scroll="true"
 				 @touchstart="touchstart" @touchend="touchend" @touchmove="touchmove" :canvas-id="canvasId"></canvas>
 			</view>
@@ -235,7 +235,8 @@
 								transPixels.push(pixels[i + 3]);
 							}
 						}
-						var percent = (transPixels.length / (pixels.length / 4) * 100).toFixed(2);
+						//var percent = (transPixels.length / (pixels.length / 4) * 100).toFixed(2);
+						var percent = (transPixels.length / (pixels.length/2) * 100).toFixed(2);
 						if (percent >= this.percentage) {
 							this.success();
 						}
@@ -304,4 +305,3 @@
 		width: 100%;
 	}
 </style>
-

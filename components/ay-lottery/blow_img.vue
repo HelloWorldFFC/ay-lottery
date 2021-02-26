@@ -215,7 +215,7 @@
 								transPixels.push(pixels[i + 3]);
 							}
 						}
-						var percent = (transPixels.length / (pixels.length / 4) * 100).toFixed(2);
+						var percent = (transPixels.length / (pixels.length / 2) * 100).toFixed(2);
 						if( percent >= this.percentage ){						
 							this.success();
 						}
