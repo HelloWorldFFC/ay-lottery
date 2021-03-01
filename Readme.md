@@ -58,9 +58,73 @@
 ## 开始使用
 下载源码解压，复制`/components` 下的组件至项目根目录的 `/components` 文件夹下
 
-`index.vue`的`script`加入如下部分（自行选择需要展示的部分）：
+`index.vue`的是加入如下部分（自行选择需要展示的部分）：
 ```
-import aylottery from '@/components/ay-lottery/ay-lottery.vue';
+<template>
+	<view class="content">
+		
+		<aylottery :type="1" themeColor="#33CCCC" btn_Color="#ffffff" seled_Color="#DB7093" seled_t_Color="#98FB98" un_seled_Color="#00BFFF"
+		 un_seled_t_Color="#33CCCC" :result_txt="result_turn" @show="show_turn" @again="again_turn" :show_again="true" again_txt="重新开始" :tips_init="tips_init_turn" :no_z_init="no_z_init_turn"></aylottery>
+		
+		
+		<aylottery :type="2" :list="list" themeColor="#33CCCC" bgColor="#1E90FF" bg_sd_Color="#4169E1" @result="resultFun" @toDetailPage="toDetailPage"></aylottery>
+		
+		<aylottery :type="3" :list="list_r" :height="600" :width="600" :chance_num_init="chance_num_init" @result="resultFun_chance" @toDetailPage="toDetailPage" :stay_index="stay_index_r"></aylottery>
+		
+		
+		<aylottery :type="4" canvasId="canvasId1" :height="200" :width="600" refs="card" style="margin: 20upx 40upx;"
+		 @complete="seatShow" :disabled="false" title="刮文本" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow" :result_txt="result_blow" themeColor="#33CCCC" :txtFontSize="txtFontSize_blow" :txtColor="txtColor_blow">
+		</aylottery>
+		
+		<aylottery :type="5" canvasId="canvasId2" :height="200" :width="600" refs="card" style="margin: 0 40upx;" @complete="seatShow"
+		 :disabled="false" title="刮图片" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow" :result_img="result_img_blow"></aylottery>
+		
+		
+		<!-- <blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="margin: 0 40upx;"
+		  @complete="seatShow" :disabled="false" title="刮文本" watermark="刮一刮" @init="init_blow">
+		 	<view class="blow" v-if="is_show_blow" style="height:200rpx;width:600rpx;position: absolute;">
+		 		<view class="box" :style="{background: themeColor }">
+		 			<view class="result" :style="[{'font-size':txtFontSize_blow+'rpx'},{color: txtColor_blow }]">
+		 				<text>{{result_blow}}</text>
+		 			</view>
+		 
+		 		</view>
+		 
+		 	</view>
+		 </blowAny> -->
+		 
+		 <!-- <blowAny  canvasId="canvasId2" :height="200" :width="600" refs="card" style="margin: 0 40upx;" @complete="seatShow"
+		  :disabled="false" title="刮图片" watermark="刮一刮" @init="init_blow">
+		 	<view style="position: absolute;" v-if="is_show_blow" >
+		 	
+		 		<view>
+		 			<image style="height:200rpx;width:600rpx;"  :src="result_img_blow"></image>
+		 		</view>
+		 	
+		 	</view>
+		 	
+		 
+		 </blowAny> -->
+		 
+		
+		<blowAny  canvasId="canvasId3" :height="200" :width="600" refs="card" style="margin: 0 40upx;" @complete="seatShow"
+		 :disabled="false" title="刮自定义" watermark="刮一刮" @init="init_blow">
+			<view style="position: absolute;" v-if="is_show_blow" >
+				
+				<view style="margin: 40upx;">
+					自定义内容需自己编写
+				</view>
+			
+			</view>
+			
+		
+		</blowAny>
+		
+	</view>
+</template>
+
+<script>
+	import aylottery from '@/components/ay-lottery/ay-lottery.vue';
 	import blowAny from '@/components/ay-lottery/blow_any.vue';
 	export default {
 		components: {
@@ -329,76 +393,53 @@ import aylottery from '@/components/ay-lottery/ay-lottery.vue';
 			}
 		}
 	}
+</script>
+
+<style lang="scss">
+	// 刮自定义
+	.blow {
+	
+		background-size: contain;
+		margin: 0rpx auto;
+		box-sizing: border-box;
+		position: relative;
+		overflow: hidden;
+	
+		.box {
+			width: 100%;
+			height: 100%;
+			// background: #aaaa7f;
+			border-radius: 10rpx;
+			position: relative;
+			overflow: hidden;
+	
+			.result {
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				// font-size: 50rpx;
+				// color: #FFFFFF;
+			}
+	
+	
+		}
+	
+	
+	}
+	
+	.box {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+</style>
 
 
 ```
 
-
-`index.vue`的`template`加入如下部分：（自行打开注释选择需要展示的部分）
-```
-<view class="content">
-		
-		<aylottery :type="1" themeColor="#33CCCC" btn_Color="#ffffff" seled_Color="#DB7093" seled_t_Color="#98FB98" un_seled_Color="#00BFFF"
-		 un_seled_t_Color="#33CCCC" :result_txt="result_turn" @show="show_turn" @again="again_turn" :show_again="true" again_txt="重新开始" :tips_init="tips_init_turn" :no_z_init="no_z_init_turn"></aylottery>
-		
-		
-		<aylottery :type="2" :list="list" themeColor="#33CCCC" bgColor="#1E90FF" bg_sd_Color="#4169E1" @result="resultFun" @toDetailPage="toDetailPage"></aylottery>
-		
-		<aylottery :type="3" :list="list_r" :height="600" :width="600" :chance_num_init="chance_num_init" @result="resultFun_chance" @toDetailPage="toDetailPage" :stay_index="stay_index_r"></aylottery>
-		
-		
-		<!-- <aylottery :type="4" canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 20upx 40upx;"
-		 @complete="seatShow" :disabled="false" title="刮文本" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow" :result_txt="result_blow" themeColor="#33CCCC" :txtFontSize="txtFontSize_blow" :txtColor="txtColor_blow">
-		</aylottery> -->
-		
-		<!-- <aylottery :type="5" canvasId="canvasId2" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;" @complete="seatShow"
-		 :disabled="false" title="刮图片" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow" :result_img="result_img_blow"></aylottery> -->
-		
-		
-		 <!-- <blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;"
-		  @complete="seatShow" :disabled="false" title="刮文本" watermark="刮一刮" @init="init_blow">
-		 	<view class="blow" v-if="is_show_blow" style="height:200rpx;width:600rpx;position: absolute;">
-		 		<view class="box" :style="{background: themeColor }">
-		 			<view class="result" :style="[{'font-size':txtFontSize_blow+'rpx'},{color: txtColor_blow }]">
-		 				<text>{{result_blow}}</text>
-		 			</view>
-		 
-		 		</view>
-		 
-		 	</view>
-		 </blowAny> -->
-		 
-		 <!-- <blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;" @complete="seatShow"
-		  :disabled="false" title="刮图片" watermark="刮一刮" @init="init_blow">
-		 	<view style="position: absolute;" v-if="is_show_blow" >
-		 	
-		 		<view>
-		 			<image style="height:200rpx;width:600rpx;"  :src="result_img_blow"></image>
-		 		</view>
-		 	
-		 	</view>
-		 	
-		 
-		 </blowAny> -->
-		 
-		
-		<!-- <blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="position: relative;margin: 0 40upx;" @complete="seatShow"
-		 :disabled="false" title="刮自定义" watermark="刮一刮" @init="init_blow">
-			<view style="position: absolute;" v-if="is_show_blow" >
-				
-				<view>
-					自定义内容需自己编写
-				</view>
-			
-			</view>
-			
-		
-		</blowAny> -->
-		
-	</view>
-
-```
- 
 
 ## 参考
 [参考链接1](https://blog.csdn.net/qq_43764578/article/details/106329612)

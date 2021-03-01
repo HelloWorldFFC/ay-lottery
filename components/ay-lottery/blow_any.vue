@@ -1,6 +1,6 @@
 <template>
 	<view >
-		<view  :id="canvasId" class="box">
+		<view  :id="canvasId" class="box" style="position: relative;">
 			<view  :style="{width: width+'rpx', height : height+'rpx'}" >
 				<slot></slot>
 				<canvas style="position: absolute;" :style="{width: width+'rpx', height : height+'rpx'}" :disable-scroll="true" @touchstart="touchstart" @touchend="touchend" @touchmove="touchmove" :canvas-id="canvasId"></canvas>

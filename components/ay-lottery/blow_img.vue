@@ -1,6 +1,6 @@
 <template>
 	<view >
-		<view  :id="canvasId" class="box">
+		<view  :id="canvasId" class="box" style="position: relative;">
 			<view  :style="{width: width+'rpx', height : height+'rpx'}" >
 				<view style="position: absolute;" v-if="is_show">
 				
