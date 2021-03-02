@@ -16,7 +16,11 @@
 		@again="again" ></turnLottery>
 		
 		
-		<marquee v-if="type==2" :list="list" :themeColor="themeColor" :bgColor="bgColor" :bg_sd_Color="bg_sd_Color" @result="result" @toDetailPage="toDetailPage"></marquee>
+		<marquee v-if="type==2" :list="list" :themeColor="themeColor" :bgColor="bgColor" :bg_sd_Color="bg_sd_Color" @result="result" @toDetailPage="toDetailPage"
+		:theme_img_bg="theme_img_bg" 
+		:is_img_bg="is_img_bg"
+		:box_shadow_Color="box_shadow_Color"
+		:bg_img="bg_img"></marquee>
 		
 		<turnplate v-if="type==3" :list="list" :chance_num_init="chance_num_init" :height="height" :width="width" @result="result" @toDetailPage="toDetailPage" :stay_index="stay_index"></turnplate>
 		
@@ -234,6 +238,25 @@
 			result_img: {
 				type: String,
 				default: 'https://cdn.pixabay.com/photo/2021/01/04/07/38/lily-5886728__340.jpg',
+			},
+			//跑马灯启用图片背景
+			is_img_bg: { 
+				type: Boolean,
+				default: false
+			},
+			//背景图片
+			theme_img_bg: {
+				type: String,
+				default: '',
+			},
+			box_shadow_Color: {
+				type: String,
+				default: '#fcc8d0',
+			},
+			//底部背景图片
+			bg_img: {
+				type: String,
+				default: '',
 			},
 		},
 		computed: {

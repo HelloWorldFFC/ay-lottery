@@ -3,11 +3,15 @@
 		<view class="box" :style="style_box">
 			<view class="dot" :class="'dot-'+(index+1)" v-for="(item,index) in dotList" :key="index"></view>
 			<view class="box-in" :style="style_box_in">
-				<view class="ct-out" :class="['award-'+(index+1),index==indexSelect?'awardSelect':'']" v-for="(item,index) in list"
-				 :key="index">
+				
+				<view  class="ct-out"  :class="['award-'+(index+1),index==indexSelect?'awardSelect':'']" v-for="(item,index) in list"
+				 :key="index" :style="[{'background-image':'url('+(is_img_bg?item.img_bg:'')+')'},{'box-shadow': '0 8rpx 0 ' + box_shadow_Color}]">
+				 <!-- {{item.name}} -->
 					<image lazy-load="true" @tap="toDetailPage({index: index})" class="award-image" :src="item.img"></image>
 				</view>
-				<view class="btn-start" :class="isRunning?'ative':''" @click="start">开始</view>
+				
+				
+				<view :style="[{'box-shadow': '0 8rpx 0 ' + box_shadow_Color}]" class="btn-start" :class="isRunning?'ative':''" @click="start">开始</view>
 			</view>
 		</view>
 	</view>
@@ -44,6 +48,25 @@
 				type: Number,
 				default: 650
 			},
+			//跑马灯启用图片背景
+			is_img_bg: { 
+				type: Boolean,
+				default: false
+			},
+			//背景图片
+			theme_img_bg: {
+				type: String,
+				default: '',
+			},
+			box_shadow_Color: {
+				type: String,
+				default: '#fcc8d0',
+			},
+			//底部背景图片
+			bg_img: {
+				type: String,
+				default: '',
+			},
 		},
 		data() {
 			return {
@@ -66,6 +89,11 @@
 					style += `width:${width}rpx;`;
 				}
 				style += `background-color:${that.bgColor};`;
+				
+				if(that.is_img_bg && that.bg_img.length>0){
+					style += `background-image:url(${that.bg_img});`;
+				}
+				
 				style += `box-shadow: 0 10px 0  ${that.bg_sd_Color};`;
 				return style;
 			},
@@ -80,10 +108,16 @@
 				if (width > 70) {
 					style += `width:${width-70}rpx;`;
 				}
+				
 				style += `background-color:${that.themeColor};`;
 				
+				var theme_img_bg = that.theme_img_bg;
+				if(that.is_img_bg && theme_img_bg.length>0){
+					style += `background-image:url(${that.theme_img_bg});`;
+				}
 				return style;
 			},
+			
 		},
 		methods: {
 			//详情页
@@ -156,6 +190,9 @@
 		top: 0;
 		bottom: 0;
 		margin: auto;
+		
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
 	}
 
 	/**小圆点 start*/
@@ -347,6 +384,9 @@
 		background-color: #fcecec;
 		border-radius: 15rpx;
 		box-shadow: 0 4px 0 #fcc8d0;
+		
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
 	}
 
 	/* 580 530  */
@@ -401,7 +441,7 @@
 		height: 150rpx;
 		width: 168rpx;
 		background-color: #fc4034;
-		box-shadow: 0 4px 0 #fcc8d0;
+		// box-shadow: 0 4px 0 #fcc8d0;
 		color: #fcf400;
 		text-align: center;
 		font-size: 32rpx;
