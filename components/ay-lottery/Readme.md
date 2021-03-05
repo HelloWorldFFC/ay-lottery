@@ -2,7 +2,7 @@
 ## 前言
 简介：
 1.抽奖效果组件：
-	有4个类型：1:翻牌  2:跑马灯 3：转盘 4： 刮一刮（文本） 5： 刮一刮（图片）
+	有4个类型：1:翻牌  2:跑马灯 3：转盘 4： 刮一刮（文本） 5： 刮一刮（图片）6： 刮一刮（随便定义）
 2.自定义主题色，和显示内容、背景色和背景图等，开箱即用
 
 ## 有疑问
@@ -12,7 +12,7 @@
 
 |属性	|类型	|说明	|
 |--	|--	|--	|
-|type	|Number	|1:翻牌  2:跑马灯 3：转盘 4： 刮一刮（文本） 5： 刮一刮（图片），默认1|
+|type	|Number	|1:翻牌  2:跑马灯 3：转盘 4： 刮一刮（文本） 5： 刮一刮（图片）6： 刮一刮（随便定义），默认1|
 |list	|Array	|控制多个时的传值，可控制图片路径，可文字|
 |-- 	|img	|提示图片|
 |-- 	|name	|名称|
@@ -120,7 +120,7 @@
 		 </blowAny> -->
 
 
-		<blowAny canvasId="canvasId3" :height="200" :width="600" refs="card" style="margin: 40upx;" @complete="seatShow"
+		<aylottery :type="6" canvasId="canvasId3" :height="200" :width="600" refs="card" style="margin: 40upx;" @complete="seatShow"
 		 :disabled="false" title="刮自定义" watermark="刮一刮" @init="init_blow">
 			<view style="position: absolute;" v-if="is_show_blow">
 
@@ -131,18 +131,16 @@
 			</view>
 
 
-		</blowAny>
+		</aylottery>
 
 	</view>
 </template>
 
 <script>
 	import aylottery from '@/components/ay-lottery/ay-lottery.vue';
-	import blowAny from '@/components/ay-lottery/blow_any.vue';
 	export default {
 		components: {
 			aylottery,
-			blowAny,
 		},
 
 		data() {
@@ -462,6 +460,8 @@
 
 ```
 
+## 汇总组件
+[组件汇总](https://ext.dcloud.net.cn/plugin?id=4276)
 
 ## 参考
 [参考链接1](https://blog.csdn.net/qq_43764578/article/details/106329612)

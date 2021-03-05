@@ -52,7 +52,7 @@
 		 </blowAny> -->
 
 
-		<blowAny canvasId="canvasId3" :height="200" :width="600" refs="card" style="margin: 40upx;" @complete="seatShow"
+		<aylottery :type="6" canvasId="canvasId3" :height="200" :width="600" refs="card" style="margin: 40upx;" @complete="seatShow"
 		 :disabled="false" title="刮自定义" watermark="刮一刮" @init="init_blow">
 			<view style="position: absolute;" v-if="is_show_blow">
 
@@ -63,18 +63,16 @@
 			</view>
 
 
-		</blowAny>
+		</aylottery>
 
 	</view>
 </template>
 
 <script>
 	import aylottery from '@/components/ay-lottery/ay-lottery.vue';
-	import blowAny from '@/components/ay-lottery/blow_any.vue';
 	export default {
 		components: {
 			aylottery,
-			blowAny,
 		},
 
 		data() {

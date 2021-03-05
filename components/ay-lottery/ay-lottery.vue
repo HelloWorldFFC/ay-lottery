@@ -71,6 +71,32 @@
 		:txtColor="txtColor"
 		@complete="complete"
 		@init="init"></blowImg>
+		
+		<blowAny v-if="type==6"
+		ref="blowRef"
+		:canvasId="canvasId" 
+		:height="height" 
+		:width="width" 
+		:percentage="percentage" 
+		:touchSize="touchSize"
+		:fillColor="fillColor"
+		:watermark="watermark"
+		:watermarkColor="watermarkColor"
+		:watermarkSize="watermarkSize"
+		:title="title"
+		:titleColor="titleColor"
+		:titleSize="titleSize"
+		:disabled="disabled"
+		
+		:is_show="is_show"
+		:result_img="result_img"
+		:result_txt="result_txt"
+		:txtFontSize="txtFontSize" 
+		:txtColor="txtColor"
+		@complete="complete"
+		@init="init">
+			<slot></slot>
+		</blowAny>
 	</view>
 </template>
 
@@ -80,6 +106,7 @@
 	import turnLottery from './turnLottery.vue';
 	import blow from './blow.vue';
 	import blowImg from './blow_img.vue';
+	import blowAny from './blow_any.vue';
 	export default {
 		components: {
 			marquee,
@@ -87,11 +114,12 @@
 			turnLottery,
 			blow,
 			blowImg,
+			blowAny,
 		},
 		props: {
 			type: {
 				type: Number,
-				default: 1, //1:翻牌  2:跑马灯 3：转盘 4： 刮一刮（文本） 5： 刮一刮（图片）
+				default: 1, //1:翻牌  2:跑马灯 3：转盘 4： 刮一刮（文本） 5： 刮一刮（图片）6： 刮一刮（随便定义）
 			},
 			list: {
 				type: Array,
