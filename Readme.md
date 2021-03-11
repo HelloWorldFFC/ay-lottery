@@ -33,7 +33,7 @@
 |bgColor	|String	|用于跑马灯，背景色，默认#1E90FF|
 |bg_sd_Color	|String	|用于跑马灯，底部背景色，默认#4169E1|
 |chance_num_init	|Number	|用于转盘，剩余机会，默认5|
-|stay_index	|Number	|用于转盘，停留位置，默认1|
+|stay_index	|Number	|用于转盘，跑马灯，停留位置，默认1|
 |@result	|function	|用于转盘、跑马灯，完成回调事件	|
 |canvasId	|String	|画布id	|
 |percentage	|Number	|用于刮一刮，刮开百分之多少的时候开奖	，默认45|
@@ -75,10 +75,12 @@
 
 
 		<aylottery :type="2" :list="list" themeColor="#33CCCC" bgColor="#1E90FF" bg_sd_Color="#4169E1" @result="resultFun"
-		 @toDetailPage="toDetailPage"></aylottery>
+		 @toDetailPage="toDetailPage"
+		 :stay_index="stay_index_m"></aylottery>
 
 		<aylottery :type="2" :list="list" themeColor="#33CCCC" bgColor="#1E90FF" bg_sd_Color="#F4A460" @result="resultFun"
-		 @toDetailPage="toDetailPage" theme_img_bg="https://cdn.pixabay.com/photo/2021/02/17/12/04/winter-6024017__340.jpg" :is_img_bg="true" box_shadow_Color="#F0F8FF" bg_img="https://cdn.pixabay.com/photo/2018/05/12/03/18/love-3392348__340.jpg"></aylottery>
+		 @toDetailPage="toDetailPage" theme_img_bg="https://cdn.pixabay.com/photo/2021/02/17/12/04/winter-6024017__340.jpg" :is_img_bg="true" box_shadow_Color="#F0F8FF" bg_img="https://cdn.pixabay.com/photo/2018/05/12/03/18/love-3392348__340.jpg"
+		 :stay_index="stay_index_m"></aylottery>
 
 		<aylottery :type="3" :list="list_r" :height="600" :width="600" :chance_num_init="chance_num_init" @result="resultFun_chance"
 		 @toDetailPage="toDetailPage" :stay_index="stay_index_r"></aylottery>
@@ -151,9 +153,10 @@
 				txtFontSize_blow: 50,
 				txtColor_blow: '#FFFFFF',
 
-
+				stay_index_m : 1 ,//跑马灯
 				stay_index_r_init: 4,
 				stay_index_r: 1,
+				stay_index_m_init : 4,
 				tips_init_turn: '点击',
 				no_z_init_turn: '点击',
 				result_turn: '',
@@ -352,8 +355,12 @@
 			resultFun(e) {
 				let that = this;
 				let item = e.item;
+				let list = e.list;
+				
 				this.msg_modal("抽中了" + item.name, '恭喜您')
-
+				//定义下一次转的位置
+				that.stay_index_m = Math.round(Math.random() * (list.length - 1)); //随机数
+				
 			},
 			resultFun_chance(e) {
 				let that = this;
@@ -388,7 +395,8 @@
 
 				//第一次转盘停的位置
 				that.stay_index_r = that.stay_index_r_init;
-
+				that.stay_index_m = that.stay_index_m_init;
+				
 				that.isLoaded = true;
 
 			},

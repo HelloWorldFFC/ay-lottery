@@ -67,6 +67,11 @@
 				type: String,
 				default: '',
 			},
+			//停留位置
+			stay_index :{
+				type: Number,
+				default: 1
+			},
 		},
 		data() {
 			return {
@@ -155,9 +160,22 @@
 					//这里用y=30*x+150函数做的处理.可根据自己的需求改变转盘速度
 					indexSelect = indexSelect % 8;
 					this.indexSelect = indexSelect;
+					
+					
 					i += 40;
+					//console.log(i)
 					if (i > randomNum) {
+						
 						//去除循环
+						
+						//控制停留位置
+						indexSelect =  that.stay_index;
+						this.indexSelect =  indexSelect;
+						
+						// console.log(randomNum)
+						// console.log(indexSelect)
+						// console.log(JSON.stringify(that.list[indexSelect]) )
+						
 						clearInterval(timer)
 						timer = null;
 						let data = {

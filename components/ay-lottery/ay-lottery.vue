@@ -20,7 +20,8 @@
 		:theme_img_bg="theme_img_bg" 
 		:is_img_bg="is_img_bg"
 		:box_shadow_Color="box_shadow_Color"
-		:bg_img="bg_img"></marquee>
+		:bg_img="bg_img"
+		:stay_index="stay_index"></marquee>
 		
 		<turnplate v-if="type==3" :list="list" :chance_num_init="chance_num_init" :height="height" :width="width" @result="result" @toDetailPage="toDetailPage" :stay_index="stay_index"></turnplate>
 		
