@@ -1,6 +1,6 @@
 <template>
 	<view >
-		<view  :id="canvasId" class="box" style="position: relative;">
+		<view  :id="canvasId" class="box-ly-b-img" style="position: relative;">
 			<view  :style="{width: width+'rpx', height : height+'rpx'}" >
 				<view style="position: absolute;" v-if="is_show">
 				
@@ -245,7 +245,7 @@
 </script>
 
 <style lang="scss">
-	.box{
+	.box-ly-b-img{
 		display: flex;
 		flex-direction: row;
 		justify-content: center;

@@ -1,10 +1,10 @@
 <template>
 	<view>
-		<view :id="canvasId" class="box" style="position: relative;">
+		<view :id="canvasId" class="box-ly-b" style="position: relative;">
 			<view :style="{width: width+'rpx', height : height+'rpx'}">
 
 				<view class="blow" v-if="is_show" :style="{width: width+'rpx', height : height+'rpx'}" style="position: absolute;">
-					<view class="box" :style="{background: themeColor }">
+					<view class="box-ly-b" :style="{background: themeColor }">
 						<view class="result" :style="[{'font-size':txtFontSize+'rpx'},{color: txtColor }]">
 							<text>{{result_txt}}</text>
 						</view>
@@ -274,7 +274,7 @@
 		position: relative;
 		overflow: hidden;
 
-		.box {
+		.box-ly-b {
 			width: 100%;
 			height: 100%;
 			// background: #aaaa7f;
@@ -297,7 +297,7 @@
 
 	}
 
-	.box {
+	.box-ly-b {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;

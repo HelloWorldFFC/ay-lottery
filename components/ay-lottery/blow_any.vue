@@ -1,6 +1,6 @@
 <template>
 	<view >
-		<view  :id="canvasId" class="box" style="position: relative;">
+		<view  :id="canvasId" class="box-ly-b-ay" style="position: relative;">
 			<view  :style="{width: width+'rpx', height : height+'rpx'}" >
 				<slot></slot>
 				<canvas style="position: absolute;" :style="{width: width+'rpx', height : height+'rpx'}" :disable-scroll="true" @touchstart="touchstart" @touchend="touchend" @touchmove="touchmove" :canvas-id="canvasId"></canvas>
@@ -231,7 +231,7 @@
 </script>
 
 <style lang="scss">
-	.box{
+	.box-ly-b-ay{
 		display: flex;
 		flex-direction: row;
 		justify-content: center;

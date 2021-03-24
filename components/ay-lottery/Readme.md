@@ -55,6 +55,8 @@
 |theme_img_bg	|String	|用于跑马灯，背景图片|
 |box_shadow_Color	|String	|用于跑马灯，未选中的底部颜色|
 |bg_img	|String	|用于跑马灯，底部背景图片|
+|seled_img	|String	|用于翻牌，选中时背景图片|
+|un_seled_img	|String	|用于翻牌，未选中时背景图片|
 				  
 
 ## 素材

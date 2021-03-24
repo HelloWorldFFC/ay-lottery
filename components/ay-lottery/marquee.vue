@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="box" :style="style_box">
+		<view class="box-ly-pm" :style="style_box">
 			<view class="dot" :class="'dot-'+(index+1)" v-for="(item,index) in dotList" :key="index"></view>
 			<view class="box-in" :style="style_box_in">
 				
@@ -194,7 +194,7 @@
 </script>
 
 <style lang="scss">
-	.box {
+	.box-ly-pm {
 		margin: 40rpx auto;
 		border-radius: 40rpx;
 		position: relative;

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="box" :style="style_box">
+		<view class="box-ly-zp" :style="style_box">
 				<view :animation="animationData" class="cs-ct" :style="style_wh">
 					<view class="cs-line">
 						<view class="cs-litem"  v-for="(item,index) in awardsList" :key="index" :style="[{transform:'rotate('+item.lineTurn+')'},{'background-color':themeColor},{left:(width/2) +'rpx'},{height:(height/2) +'rpx'},{'-webkit-transform-origin': '50% ' +(height/2) +'rpx'},{'transform-origin': '50% ' +(height/2) +'rpx'}]"></view>
@@ -213,7 +213,7 @@
 	}
 	
 	/* 转盘 */
-	.box {
+	.box-ly-zp {
 		margin: 0 auto;
 		position: relative;
 		border-radius: 50%;

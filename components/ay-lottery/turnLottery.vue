@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<view v-if="show_again" class="re-turn" :style="[{'background-color': themeColor},{color: btn_Color }]" @click="again">{{again_txt}}</view>
-		<view class="box">
-			<view @click="tamin(index)" v-for="(item,index) in 9" :key="index" class="box-item" :class="[really == index+1?'animt':'', really != index+1 && surplus?'animt':'', really == ''?'item'+(index+1):'']" :style="really == index+1 && implement > 1?style_seled:style_un_seled">
+		<view class="box-ly-fp">
+			<view @click="tamin(index)" v-for="(item,index) in 9" :key="index" class="box-item-ly-fp" :class="[really == index+1?'animt':'', really != index+1 && surplus?'animt':'', really == ''?'item'+(index+1):'']" :style="really == index+1 && implement > 1?style_seled:style_un_seled">
 				{{really == index+1?can_z:''}}{{really != index+1 && really != ''?no_z:''}}{{really == ''?tips:''}}
 			</view>
 		</view>
@@ -22,6 +22,7 @@
 				type: String,
 				default: '#ffffff',
 			},
+			
 			seled_Color: {
 				type: String,
 				default: '#f43f3b',
@@ -66,6 +67,14 @@
 				type: Number,
 				default: 350
 			},
+			seled_img: {
+				type: String,
+				default: '',
+			},
+			un_seled_img: {
+				type: String,
+				default: '',
+			},
 		},
 		watch:{
 			result_txt(e){
@@ -88,16 +97,26 @@
 			style_seled() {
 				let that = this;
 				var style = '';
-				style = `background-image: linear-gradient(45deg, ${that.seled_Color}, ${that.seled_t_Color});`;
 				
+				if(that.seled_img.length>0){
+					style = `background-image: url(${that.seled_img});`;
+					
+				}else{
+					style = `background-image: linear-gradient(45deg, ${that.seled_Color}, ${that.seled_t_Color});`;
+					
+				}
 				return style;
 			},
 			style_un_seled() {
 				let that = this;
 				
 				var style = '';
-				style = `background-image: linear-gradient(45deg, ${that.un_seled_Color}, ${that.un_seled_t_Color});`;
-					
+				if(that.seled_img.length>0){
+					style = `background-image: url(${that.un_seled_img});`;
+				}else{
+					style = `background-image: linear-gradient(45deg, ${that.un_seled_Color}, ${that.un_seled_t_Color});`;
+				}
+				
 				return style;
 			},
 		},
@@ -185,7 +204,7 @@
 		position: relative;
 	}
 
-	.box {
+	.box-ly-fp {
 		width: 100%;
 		display: flex;
 		justify-content: space-around;
@@ -194,7 +213,7 @@
 		padding: 10upx 10upx 20upx 10upx;
 	}
 
-	.box-item {
+	.box-item-ly-fp {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -209,9 +228,13 @@
 		margin-top: 50rpx;
 		text-align: center;
 		
+		
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		
 	}
 
-	.box-item::before {
+	.box-item-ly-fp::before {
 		content: "";
 		display: block;
 		background: inherit;

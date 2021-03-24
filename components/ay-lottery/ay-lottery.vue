@@ -13,7 +13,9 @@
 		:tips_init="tips_init"
 		:no_z_init="no_z_init"
 		@show="show" 
-		@again="again" ></turnLottery>
+		@again="again" 
+		:seled_img="seled_img"
+		:un_seled_img="un_seled_img"></turnLottery>
 		
 		
 		<marquee v-if="type==2" :list="list" :themeColor="themeColor" :bgColor="bgColor" :bg_sd_Color="bg_sd_Color" @result="result" @toDetailPage="toDetailPage"
@@ -284,6 +286,16 @@
 			},
 			//底部背景图片
 			bg_img: {
+				type: String,
+				default: '',
+			},
+			//翻牌选中的图片背景
+			seled_img: {
+				type: String,
+				default: '',
+			},
+			//翻牌未选中的图片背景
+			un_seled_img: {
 				type: String,
 				default: '',
 			},
