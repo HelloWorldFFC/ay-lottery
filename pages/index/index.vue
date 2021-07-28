@@ -25,12 +25,15 @@
 
 		<aylottery :type="4" canvasId="canvasId1" :height="200" :width="600" refs="card" style="margin: 20upx 40upx;"
 		 @complete="seatShow" :disabled="false" title="刮文本" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow"
-		 :result_txt="result_blow" themeColor="#33CCCC" :txtFontSize="txtFontSize_blow" :txtColor="txtColor_blow">
+		 :result_txt="result_blow" themeColor="#33CCCC" :txtFontSize="txtFontSize_blow" :txtColor="txtColor_blow" :init_show="init_show_blow">
 		</aylottery>
-
+		<view class="reset-blow-box" @tap="reset_blow">
+			<button style="width: 400upx;" class="cf-bgcolorTheme">重置</button>
+		</view>
+		
 		<aylottery :type="5" canvasId="canvasId2" :height="200" :width="600" refs="card" style="margin: 0 40upx;" @complete="seatShow"
-		 :disabled="false" title="刮图片" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow" :result_img="result_img_blow"></aylottery>
-
+		 :disabled="false" title="刮图片" watermark="刮一刮" @init="init_blow" :is_show="is_show_blow" :result_img="result_img_blow" :init_show="init_show_blow"></aylottery>
+		
 
 		<!-- <blowAny  canvasId="canvasId1" :height="200" :width="600" refs="card" style="margin: 0 40upx;"
 		  @complete="seatShow" :disabled="false" title="刮文本" watermark="刮一刮" @init="init_blow">
@@ -60,7 +63,7 @@
 
 
 		<aylottery :type="6" canvasId="canvasId3" :height="200" :width="600" refs="card" style="margin: 40upx;" @complete="seatShow"
-		 :disabled="false" title="刮自定义" watermark="刮一刮" @init="init_blow">
+		 :disabled="false" title="刮自定义" watermark="刮一刮" @init="init_blow" :init_show="init_show_blow">
 			<view style="position: absolute;" v-if="is_show_blow">
 
 				<view style="margin: 40upx;">
@@ -71,7 +74,8 @@
 
 
 		</aylottery>
-
+		
+		
 	</view>
 </template>
 
@@ -84,6 +88,7 @@
 
 		data() {
 			return {
+				init_show_blow:false ,//刮一刮重置
 				result_img_blow: 'https://cdn.pixabay.com/photo/2021/01/04/07/38/lily-5886728__340.jpg',
 				is_show_blow: false, //防止画布画好前闪烁
 				themeColor: '#33CCCC',
@@ -236,6 +241,14 @@
 
 		},
 		methods: {
+			//刮一刮重置
+			reset_blow: function() {
+				//this.$refs.card.init();
+				this.init_show_blow =true ;
+				setTimeout(() => {
+					this.init_show_blow = false;
+				}, 1000)
+			},
 			//刮一刮
 			init_blow() {
 				this.is_show_blow = true;
@@ -399,5 +412,14 @@
 		justify-content: center;
 		align-items: center;
 		width: 100%;
+	}
+	.cf-bgcolorTheme {
+		background-color: #33CCCC;
+		color: #FFFFFF;
+	}
+	.reset-blow-box{
+		width: 100%;
+		text-align: center;
+		margin: 50upx auto;
 	}
 </style>

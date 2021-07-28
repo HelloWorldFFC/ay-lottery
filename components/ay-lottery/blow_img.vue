@@ -80,6 +80,10 @@
 				type : Boolean ,
 				default : false 
 			},
+			init_show: { //是否初始化
+				type : Boolean ,
+				default : false 
+			},
 			
 		},
 		data() {
@@ -93,6 +97,13 @@
 				ready : false ,
 				storePoints:[]
 			};
+		},
+		watch:{
+			init_show(e){
+				if(e){
+					this.initBlow();
+				}
+			},
 		},
 		mounted() {
 			ctx = uni.createCanvasContext(this.canvasId , this) ;

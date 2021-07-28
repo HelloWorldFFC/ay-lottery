@@ -48,6 +48,7 @@
 		:result_txt="result_txt"
 		:txtFontSize="txtFontSize" 
 		:txtColor="txtColor"
+		:init_show="init_show"
 		@complete="complete"
 		@init="init"></blow>
 		
@@ -72,6 +73,7 @@
 		:result_txt="result_txt"
 		:txtFontSize="txtFontSize" 
 		:txtColor="txtColor"
+		:init_show="init_show"
 		@complete="complete"
 		@init="init"></blowImg>
 		
@@ -96,6 +98,7 @@
 		:result_txt="result_txt"
 		:txtFontSize="txtFontSize" 
 		:txtColor="txtColor"
+		:init_show="init_show"
 		@complete="complete"
 		@init="init">
 			<slot></slot>
@@ -298,6 +301,10 @@
 			un_seled_img: {
 				type: String,
 				default: '',
+			},
+			init_show: { //是否初始化
+				type : Boolean ,
+				default : false 
 			},
 		},
 		computed: {
